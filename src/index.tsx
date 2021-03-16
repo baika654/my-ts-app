@@ -24,6 +24,10 @@ GroupAccounts.push(new MemberAccount("Pummy","Bailey",123467676801));
 GroupAccounts.push(new MemberAccount("David","Myint",123467676901));
 GroupAccounts.push(new MemberAccount("Pearl","Swe",123467677001));
 GroupAccounts.push(new MemberAccount("George","Smith",123467677101));
+GroupAccounts.push(new MemberAccount("Paul", "Davis",123467677801));
+GroupAccounts.push(new MemberAccount("John","Smith",123467677901));
+GroupAccounts.push(new MemberAccount("Howard","Wilson", 123467678001));
+
 
 
 ReactDOM.render(
