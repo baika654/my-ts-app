@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+import './App.css';
+import InputElements from './InputElement';
+
+interface Props {};
+
+const FullContainer = styled.div`
+    
+    width: 100%;
+    text-align: center;
+    
+ `;
+
+class App extends Component {
+  header: React.RefObject<HTMLDivElement>;
+
+constructor(props:Props) {
+  super(props)
+  this.handleClick = this.handleClick.bind(this)
+  this.header = React.createRef();
+}
+
+  state = {eventKey:""};
+
+
+handleClick(event: React.KeyboardEvent<HTMLDivElement>):void {
+		console.log(`Key: ${event.key} with keycode X has been pressed`);
+    this.setState({eventKey: event.key});
+    event.preventDefault();
+}
+
+componentDidMount() {
+  this.header.current?.focus();
+}
+
+
+
+  render() {return (
+    <header ref={this.header} className="App-header" tabIndex={0} onKeyDown={this.handleClick}>
+      <FullContainer>
+        
+        <InputElements currentState={this.state} isValidKeyCombination={true} />
+      </FullContainer>
+    </header>
   );
+  }
 }
 
 export default App;
