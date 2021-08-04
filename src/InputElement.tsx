@@ -34,6 +34,11 @@ const LargeLetterContainer = styled.div`
     
  `;
 
+/**  For the array to work correctly, the modifier keys have to be added in alphabetical order.
+ *  So Control+Shift is valid but Shift+Control is not. All keypresses detected by
+ *  this method will sort modifier keys into alphabetical order 
+*/
+
 const reservedKeyCombinations = ['Control+g',
 'Control+h',
 'Control+i',
@@ -58,30 +63,30 @@ const reservedKeyCombinations = ['Control+g',
 'Control+Shift+v',
 'Control+Shift+z',
 'Control+space',
-'Command+g',
-'Command+h',
-'Command+i',
-'Command+n',
-'Command+p',
-'Command+r',
-'Command+t',
-'Command+z',
+'Meta+g',
+'Meta+h',
+'Meta+i',
+'Meta+n',
+'Meta+p',
+'Meta+r',
+'Meta+t',
+'Meta+z',
 'f4',
-'Command+Shift+a',
-'Command+Shift+c',
-'Command+Shift+d',
-'Command+Shift+e',
-'Command+Shift+f4',
-'Command+Shift+h',
-'Command+Shift+l',
-'Command+Shift+n',
-'Command+Shift+o',
-'Command+Shift+p',
-'Command+Shift+r',
-'Command+Shift+s',
-'Command+Shift+v',
-'Command+Shift+z',
-'Command+space']
+'Meta+Shift+a',
+'Meta+Shift+c',
+'Meta+Shift+d',
+'Meta+Shift+e',
+'Meta+Shift+f4',
+'Meta+Shift+h',
+'Meta+Shift+l',
+'Meta+Shift+n',
+'Meta+Shift+o',
+'Meta+Shift+p',
+'Meta+Shift+r',
+'Meta+Shift+s',
+'Meta+Shift+v',
+'Meta+Shift+z',
+'Meta+space']
 
 export default class InputElements extends React.Component<Props> {
 
@@ -90,10 +95,11 @@ export default class InputElements extends React.Component<Props> {
     
   render() {
     const keyInput = this.props.currentState.eventKey===' ' ? 'space' :this.props.currentState.eventKey;
-    if (keyInput=== 'Control'||keyInput==='Alt'||keyInput==='Shift'||keyInput==='Command')  {
+    if (keyInput=== 'Control'||keyInput==='Alt'||keyInput==='Shift'||keyInput==='Command'||keyInput==='Meta')  {
        if (this.modifier) {
         if (!this.keyInputBuffer.includes(keyInput)) {
-          this.keyInputBuffer = this.keyInputBuffer.concat('+',keyInput);
+          const unsortedKeyInputBuffer = this.keyInputBuffer.concat('+',keyInput);
+          this.keyInputBuffer = unsortedKeyInputBuffer.split('+').sort().join('+');
         }
        } else {
           this.keyInputBuffer = keyInput;
