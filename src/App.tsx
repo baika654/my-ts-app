@@ -22,13 +22,14 @@ constructor(props:Props) {
   this.header = React.createRef();
 }
 
-  state = {eventKey:""};
+  state = {eventKey:"", eventCode:""};
 
 
 handleClick(event: React.KeyboardEvent<HTMLDivElement>):void {
 		console.log(`Key: ${event.key} with keycode X has been pressed`);
-    this.setState({eventKey: event.key});
+    this.setState({eventKey: event.key, eventCode: event.code});
     event.preventDefault();
+    
 }
 
 componentDidMount() {

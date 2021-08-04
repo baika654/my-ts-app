@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 interface Props  {
     isValidKeyCombination:boolean,
-    currentState:{eventKey:string}
+    currentState:{eventKey:string, eventCode:string}
 }
 
 /*
@@ -95,6 +95,7 @@ export default class InputElements extends React.Component<Props> {
     
   render() {
     const keyInput = this.props.currentState.eventKey===' ' ? 'space' :this.props.currentState.eventKey;
+    const keyCode = this.props.currentState.eventCode;
     if (keyInput=== 'Control'||keyInput==='Alt'||keyInput==='Shift'||keyInput==='Command'||keyInput==='Meta')  {
        if (this.modifier) {
         if (!this.keyInputBuffer.includes(keyInput)) {
@@ -109,10 +110,10 @@ export default class InputElements extends React.Component<Props> {
     } else {
       if (this.modifier) {
         console.log(this.keyInputBuffer);
-        this.keyInputBuffer = this.keyInputBuffer.concat('+',keyInput.toLowerCase());
+        this.keyInputBuffer = this.keyInputBuffer.concat('+',keyCode);
         this.modifier = false;
       } else {
-        this.keyInputBuffer = keyInput.toLowerCase();
+        this.keyInputBuffer = keyCode;
       }
     }
 
